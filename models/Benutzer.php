@@ -74,7 +74,8 @@ class Benutzer
     public function login()
     {
         $_SESSION['email'] = $this->getEmail();
-        header("Location: wochenkarte.php");
+        header("Location: wochenkarte.php"); //sollte nicht in den Klassen sein (Logik)
+        exit();
     }
 
     /**
@@ -84,6 +85,7 @@ class Benutzer
     {
         session_destroy();
         header("Location: index.php");
+        exit();
     }
 
     /**

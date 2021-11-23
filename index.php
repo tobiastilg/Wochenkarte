@@ -31,8 +31,10 @@ require_once "models/Benutzer.php";
 
         <?php
         } else {
+
         if (Benutzer::isLoggedIn()) {
             header("Location: wochenkarte.php");
+            exit();
         }
             $message = '';
             $email = '';
@@ -41,11 +43,11 @@ require_once "models/Benutzer.php";
             if (isset($_POST['submit'])) { //Formularverarbeitung
                 $email = ($_POST['login'] ?? '');
                 $password = ($_POST['password'] ?? '');
-
-                if (Benutzer::get($email, $password) == null) { //überprüfen ob die Login Daten stimmen
+                $user = Benutzer::get($email, $password);
+                if ($user == null) { //überprüfen ob die Login Daten stimmen
                     $message .= "<div class='alert-danger form-control'><p>Die eingegebenen Daten sind fehlerhaft!</p></div>";
                 } else {
-                    Benutzer::get($email, $password)->login();
+                   $user->login();
                 }
             }
         ?>

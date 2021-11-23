@@ -22,6 +22,7 @@ require_once 'models/Benutzer.php';
     <?php
     if (!isset($_COOKIE['active'])){
         header("Location: index.php");
+        exit();
     }
     if (Benutzer::isLoggedIn()) { //wenn eingeloggt
         if (isset($_POST['logout'])) { //Formularverarbeitung, wenn man sich ausloggt
